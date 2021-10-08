@@ -47,7 +47,13 @@ Git config --global user.name 'xxx'
 
 git config -- global user.email 33333@email.com
 
+### origin
 
+- git remote -v 查看分支指针名
+
+- fork的话会变成upstream
+
+  
 
 ## GIT 基本理论
 
