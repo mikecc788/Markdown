@@ -54,6 +54,22 @@
 
 - 项目上传成功
 
+### 关联仓库
+
+- ```xml
+  git remote add origin git@github.com:<github username>/<repository name>.git
+  ```
+
+- ```crmsh
+  git pull origin master --allow-unrelated-histories
+  ```
+
+
+
+
+
+
+
 ## **本地仓库的创建和提交**
 
 - 桌面新建本地项目,创建file1文件

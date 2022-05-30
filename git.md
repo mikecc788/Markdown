@@ -1,4 +1,4 @@
-[toc]
+[TOC]
 
 # Git使用
 
@@ -53,7 +53,6 @@ git config -- global user.email 33333@email.com
 
 - fork的话会变成upstream
 
-  
 
 ## GIT 基本理论
 
@@ -63,7 +62,34 @@ git本地三个工作区域  工作目录（本地文件）、暂存区（add .�
 
 > 工作流程
 
+## Git命令
 
+- git pull:  git pull 根据配置的不同，可为git fetch + git merge 或 git fetch + git rebase
+- 跳到之前分支  git checkout  <分支>
+- git log --oneline       **每个提交在一行内显示**
+- git reset --hard <提交的哈希> **重置到相应提交**
+- git reflog 查看之前操作记录 找到版本号
+- git diff --cached git diff HEAD 比较内容不同
+- **git revert**
+- 本地和远程仓库不同步问题 先git pull origin master
+- git commit --amend -m "更好的提交日志"  编辑上一次提交
+  - 在上次提交中附加一些内容，保持提交日志不变git add . && git commit --amend --no-edit
+
+#### push
+
+- 常用 **git push origin master**
+
+错误上传
+
+- git push -u origin master -f   强制覆盖已有的分支
+-   方法二
+  - git pull origin master --allow-unrelated-histories (该选项可以合并两个独立启动仓库的历史)
+  - git push -u origin master
+
+### git fetch
+
+- `git fetch`是将远程主机的最新内容拉到本地，用户在检查了以后决定是否合并到工作本机分支中。而`git pull` 则是将远程主机的最新内容拉下来后直接合并
+- ​
 
 ## GIT文件操作
 
@@ -89,6 +115,7 @@ git branch -r //列出所有远程分支
 git branch [branch-name] //新建一个分支
 git checkout -b [branch]// 切换分支
 git merge [branch] 
+git branch 查看当前使用分支
 ```
 
 ### 合并分支 merge
@@ -105,5 +132,14 @@ git merge [branch]
 
 <img src="https://tva1.sinaimg.cn/large/008i3skNgy1guw2jjznsuj60q40gmmxx02.jpg" alt="image-20210928090831488" style="zoom:50%;" />
 
+## 常见问题分析
 
+1. push前commit log有问题 添加文件
 
+   - git commit --amend -m "fix"
+
+2. 撤销某个文件的修改 
+
+   <img src="https://tva1.sinaimg.cn/large/008i3skNgy1gvbfs6xf60j60qk03k74p02.jpg" alt="image-20211011161002777" style="zoom:50%;" />
+
+http://inntechhk.asuscomm.com/INNFY/BTA-1413.git
