@@ -1,7 +1,7 @@
 
 [TOC]
 
-# Header 1
+# Go
 ## Header 2
 ### Header 3
 #### Header 4
@@ -39,7 +39,7 @@ Display `code` in same line
 
 ```C
 print("Hello World")
-````
+​````
 
 ![Innovation Logo](MD_Demo.assets/innlogo.gif)
 
@@ -54,3 +54,28 @@ Title(1,1) | Title(1,2) | Title(1,3)
 Cell(2,1)  | Cell(2,2)  |  Cell(2,3)
 Cell(3,1)  | Cell(3,2)  |  Cell(3,3)
 
+
+```
+## ### 安装sdk
+
+- go.dev 
+
+- 安装验证 go version
+
+- 设置 GoPath  
+
+  - feellife@apps-iMac ~ % cd ~
+
+
+  - 打开 sudo nano .bash_profile
+
+
+  - GOPATH='/Users/feellife/GoPath' 
+
+    export GOPATH
+
+- Go env 验证
+
+### Module包管理
+
+- go mod init 

@@ -66,6 +66,22 @@ vim  ~/**.dash_Profile**
 
 - 整除 num ~/ 3   num % 3//取模
 
+#### List
+
+- **List.generate 快速生产 Flutter 中的 Widget**
+
+  - children: List.generate(L.length, (index){
+    ​    return Text("$index");
+     })
+
+  - ```dart
+    children: List.generate(l1.length, (index){
+        return Text('${l1[index]}');
+    }), /// List.generate 返回的是[] 所以children不需要:[]
+    ```
+
+- ​
+
 ### StreamBuilder
 
 - 异步编程方式 ===通过 Stream 实现每秒钟局部更新数据
@@ -161,6 +177,11 @@ MyPainter(this.snowflake);
 - 跳转页面的时候去掉 **MaterialApp** 不然没有返回箭头
 - listview切圆角要和背景图片一起设置
 
+### context
+
+- context无效
+  - 可以在调用之前提前定义好需要context的控件
+
 ### slivers
 
 - SliverGrid  SliverToBoxAdapter SliverList搭配使用
@@ -209,6 +230,9 @@ routes:{
 
 ### 动画
 
+- `Animation`的使用需要配合`AnimationController`  `AnimationController`需要一个`TickerProvider`
+
+
 - Ticker就是一个帧定时器
 
 
@@ -241,7 +265,11 @@ routes:{
 
 - Tag 需要定义一样
 
-#### CustomPainter
+#### CustomPaint
+
+> **自由绘制的一个widget**
+
+- painter CustomPainter类： 提供了一个paint绘图方法供我们绘制图形
 
 
 
@@ -280,6 +308,10 @@ routes:{
 - 上下都有缓冲区 预先加载
 
 - 分割线 index%2==0 ？ Divider() 不推荐
+
+#### 多选实现
+
+- https://github.com/ritsat/listview_multiselection/blob/master/lib/main.dart
 
 ### SingleChildScrollView
 
