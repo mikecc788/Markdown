@@ -22,7 +22,16 @@ vim  ~/**.dash_Profile**
 
 - 升级 flutter upgrade --force
 
+### mac操作
+
+- 打开bash
+  - feellife@apps-iMac feellife_1 % cd ~
+    feellife@apps-iMac ~ %  open -e .bash_profile
+- ​
+
 ## android 运行
+
+
 
 ### flutter_blue
 
@@ -379,6 +388,18 @@ LogD(new_data);
 ### Button
 
 - Textbutton:  MaterialStateProperty.all()设置属性
+
+### Localization
+
+- #### 占位符传参
+
+  有时候文案中的某些部分最开始是不确定的，在运行的时候才能确定。譬如文案中有价格，但是这个价格不是固定的，这时候就需要先用一个占位符占位，然后在运行的时候用真实的数据替换掉这个占位符。
+
+  我们案例中的`button`文案我们替换为为`button {seq}`, `לַחְצָן{seq}`和`按钮 {seq}`。
+
+  在使用的时候我们可以改为`Text("${S.of(context).button(index + 1)}")))`，这样的效果和前面的一样
+
+  ​
 
 ### initState 
 

@@ -2,6 +2,15 @@
 
 # Git使用
 
+## 443报错
+
+1. 可能DNS污染 修改host
+   - 查询ip地址 https://www.ipaddress.com/
+   - 打开host  sudo vim /etc/hosts  
+     - 140.82.113.3 github.com 复制到host
+
+
+
 	## 版本控制
 
 > 版本管理器
