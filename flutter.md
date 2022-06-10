@@ -29,9 +29,17 @@ vim  ~/**.dash_Profile**
     feellife@apps-iMac ~ %  open -e .bash_profile
 - ​
 
+## iOS 运行
+
+### 生成iOS文件夹
+
+- ```
+  flutter create -i swift .
+  ```
+
+- 国际化报错 （未解决）
+
 ## android 运行
-
-
 
 ### flutter_blue
 
@@ -185,6 +193,11 @@ MyPainter(this.snowflake);
 - ​	**向下传递约束 向上传递尺寸**
 - 跳转页面的时候去掉 **MaterialApp** 不然没有返回箭头
 - listview切圆角要和背景图片一起设置
+
+### Spacer
+
+- `Spacer()` 相当于弹簧的效果,使两个控件之间的距离达到最大值. (在页面不可滑动时才有效果)
+- ​
 
 ### context
 
@@ -428,6 +441,30 @@ LogD(new_data);
 ### BLOC
 
 
+
+### WeChat login
+
+- [x] fluwx
+      - no_pay版本
+- [ ] ​
+
+### app名称国际化
+
+- **android\app\src\main\res**下面新建strings.xml文件
+
+  ```xml
+  <?xml version="1.0" encoding="utf-8"?>
+  <resources>
+      <string name="app_name">你的应用名字</string>
+  </resources>
+
+  android:label="@string/app_name"
+  ```
+
+- iOS 名字国际化 只能新建**InfoPlist.strings**文件 其他名字会报错
+
+  - 添加"CFBundleName" = "flutter demo";
+  - 删掉info.plist文件的 <key>CFBundleDisplayName</key><string>Feellife 1</string>
 
 🐛 lfs :: value=[230, 23, 0, 0, 0, 0, 0, 0, 0, 75, 0, 0, 0, 0, 85, 1, 242, 160, 8, 143]
 
