@@ -22,6 +22,23 @@ vim  ~/**.dash_Profile**
 
 - 升级 flutter upgrade --force
 
+### mac操作
+
+- 打开bash
+  - feellife@apps-iMac feellife_1 % cd ~
+    feellife@apps-iMac ~ %  open -e .bash_profile
+- ​
+
+## iOS 运行
+
+### 生成iOS文件夹
+
+- ```
+  flutter create -i swift .
+  ```
+
+- 国际化报错 （未解决）
+
 ## android 运行
 
 ### flutter_blue
@@ -65,6 +82,22 @@ vim  ~/**.dash_Profile**
 ### 语法
 
 - 整除 num ~/ 3   num % 3//取模
+
+#### List
+
+- **List.generate 快速生产 Flutter 中的 Widget**
+
+  - children: List.generate(L.length, (index){
+    ​    return Text("$index");
+     })
+
+  - ```dart
+    children: List.generate(l1.length, (index){
+        return Text('${l1[index]}');
+    }), /// List.generate 返回的是[] 所以children不需要:[]
+    ```
+
+- ​
 
 ### StreamBuilder
 
@@ -161,6 +194,16 @@ MyPainter(this.snowflake);
 - 跳转页面的时候去掉 **MaterialApp** 不然没有返回箭头
 - listview切圆角要和背景图片一起设置
 
+### Spacer
+
+- `Spacer()` 相当于弹簧的效果,使两个控件之间的距离达到最大值. (在页面不可滑动时才有效果)
+- ​
+
+### context
+
+- context无效
+  - 可以在调用之前提前定义好需要context的控件
+
 ### slivers
 
 - SliverGrid  SliverToBoxAdapter SliverList搭配使用
@@ -209,6 +252,9 @@ routes:{
 
 ### 动画
 
+- `Animation`的使用需要配合`AnimationController`  `AnimationController`需要一个`TickerProvider`
+
+
 - Ticker就是一个帧定时器
 
 
@@ -241,7 +287,11 @@ routes:{
 
 - Tag 需要定义一样
 
-#### CustomPainter
+#### CustomPaint
+
+> **自由绘制的一个widget**
+
+- painter CustomPainter类： 提供了一个paint绘图方法供我们绘制图形
 
 
 
@@ -280,6 +330,10 @@ routes:{
 - 上下都有缓冲区 预先加载
 
 - 分割线 index%2==0 ？ Divider() 不推荐
+
+#### 多选实现
+
+- https://github.com/ritsat/listview_multiselection/blob/master/lib/main.dart
 
 ### SingleChildScrollView
 
@@ -348,6 +402,18 @@ LogD(new_data);
 
 - Textbutton:  MaterialStateProperty.all()设置属性
 
+### Localization
+
+- #### 占位符传参
+
+  有时候文案中的某些部分最开始是不确定的，在运行的时候才能确定。譬如文案中有价格，但是这个价格不是固定的，这时候就需要先用一个占位符占位，然后在运行的时候用真实的数据替换掉这个占位符。
+
+  我们案例中的`button`文案我们替换为为`button {seq}`, `לַחְצָן{seq}`和`按钮 {seq}`。
+
+  在使用的时候我们可以改为`Text("${S.of(context).button(index + 1)}")))`，这样的效果和前面的一样
+
+  ​
+
 ### initState 
 
 - 里面改变方法的时候 热重载没用 只走一次  重新编译生效
@@ -375,6 +441,30 @@ LogD(new_data);
 ### BLOC
 
 
+
+### WeChat login
+
+- [x] fluwx
+      - no_pay版本
+- [ ] ​
+
+### app名称国际化
+
+- **android\app\src\main\res**下面新建strings.xml文件
+
+  ```xml
+  <?xml version="1.0" encoding="utf-8"?>
+  <resources>
+      <string name="app_name">你的应用名字</string>
+  </resources>
+
+  android:label="@string/app_name"
+  ```
+
+- iOS 名字国际化 只能新建**InfoPlist.strings**文件 其他名字会报错
+
+  - 添加"CFBundleName" = "flutter demo";
+  - 删掉info.plist文件的 <key>CFBundleDisplayName</key><string>Feellife 1</string>
 
 🐛 lfs :: value=[230, 23, 0, 0, 0, 0, 0, 0, 0, 75, 0, 0, 0, 0, 85, 1, 242, 160, 8, 143]
 

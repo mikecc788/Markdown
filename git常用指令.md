@@ -2,6 +2,15 @@
 
 # Git使用
 
+## 443报错
+
+1. 可能DNS污染 修改host   
+   - 查询ip地址 https://www.ipaddress.com/
+   - 打开host  sudo vim /etc/hosts  
+     - 140.82.113.3 github.com 复制到host
+
+- [x] 方法可行
+
 	## 版本控制
 
 > 版本管理器
@@ -94,12 +103,20 @@ git本地三个工作区域  工作目录（本地文件）、暂存区（add .�
 
 #### push
 
+- 密码无效配置
+
+  [config]()
+
+  ![WeChate17bd659b9bd97485725e2b7b08d1738](/Users/feellife/Library/Containers/com.tencent.xinWeChat/Data/Library/Caches/com.tencent.xinWeChat/2.0b4.0.9/4100b5b68703b908e35e8fd25bba4804/dragImgTmp/WeChate17bd659b9bd97485725e2b7b08d1738.png)
+
+
+
 - 常用 **git push origin master**
 
 错误上传
 
 - git push -u origin master -f   强制覆盖已有的分支
--   方法二
+- 方法二
   - git pull origin master --allow-unrelated-histories (该选项可以合并两个独立启动仓库的历史)
   - git push -u origin master
 
