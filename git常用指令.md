@@ -56,6 +56,23 @@ Git config --global user.name 'xxx'
 
 git config -- global user.email 33333@email.com
 
+
+
+取消config配置
+
+- 取消代理
+
+  - git config --global --unset http.proxy
+  - git config --global --unset https.proxy
+
+- 
+
+  ```
+  比如想取消 url.git://.insteadof=https://
+  git config --global --unset url.git://.insteadof
+  查询 git config --list
+  ```
+
 ### origin
 
 - git remote -v 查看分支指针名
@@ -106,7 +123,7 @@ git本地三个工作区域  工作目录（本地文件）、暂存区（add .�
 ### git fetch
 
 - `git fetch`是将远程主机的最新内容拉到本地，用户在检查了以后决定是否合并到工作本机分支中。而`git pull` 则是将远程主机的最新内容拉下来后直接合并
-- ​
+- 
 
 ## GIT文件操作
 
