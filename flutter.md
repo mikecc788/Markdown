@@ -41,6 +41,67 @@ vim  ~/**.dash_Profile**
 
 ## android 运行
 
+### 配置启动页
+
+- 修改AndroidManifest.xml下的
+
+  ```java
+  <meta-data
+          android:name="io.flutter.embedding.android.SplashScreenDrawable"
+          android:resource="@drawable/launch_background"
+   />
+  ```
+
+- 修改res-》drawable-〉backgroud
+
+  ```java
+   <!--    android:gravity="fill" -->  centre
+   <item>
+          <bitmap
+              android:src="@mipmap/launch_image" />
+      </item>
+  ```
+
+- Mipmap-xxxhdpi添加启动页图片 launch_image.png
+
+### 配置adb
+
+- 打开.bash_profile 文件  vim  ~/**.bash_Profile**
+
+- /Users/feellife/Library/Android/sdk
+
+  ```shell
+  export ANDROID_HOME=/Users/feellife/Library/Android/sdk
+  export PATH=${PATH}:${ANDROID_HOME}/tools
+  export PATH=${PATH}:${ANDROID_HOME}/platform-tools
+  ```
+
+-  source ~/.bash_profile
+
+- 配置端口 adb tcpip 7890 
+
+- 连上手机 feellife@apps-iMac ~ % adb connect 192.168.2.2:7890
+
+### 获取MD5 flutter默认不支持
+
+- 获取md5
+
+  ```
+  cd android  
+  ./gradlew signingReport 
+  ```
+
+  ​
+
+- 获取sha1 sha256 
+
+  ```
+  feellife@apps-iMac key % keytool -list -v -keystore sign.jks
+  cd 到sign.jks所在文件夹 执行命令
+  ```
+
+  ​
+
 ### flutter_blue
 
 - Resolve 安卓12 权限 https://github.com/boskokg/flutter_blue_plus/issues/7
@@ -65,7 +126,8 @@ vim  ~/**.dash_Profile**
 ### 打包apk
 
 1. feellife@apps-iMac feellife_1 % keytool -genkey -v -keystore ~/sign.jks -keyalg RSA -keysize 2048 -validity 10000 -alias sign
-2. flutter build apk
+2. flutter build apk --release
+3. flutter build apk --release --no-sound-null-safety //如果没有适配空安全就打没有空安全的包
 
 ## Dart库
 
@@ -97,7 +159,17 @@ vim  ~/**.dash_Profile**
     }), /// List.generate 返回的是[] 所以children不需要:[]
     ```
 
-- ​
+#### map
+
+- 从数组新增元素 
+  ```dart
+  // Map map1 = Map();
+  // for (int i = 0; i < preFixArr.length; i++) {
+  // map1.putIfAbsent(preFixArr[i], () => deviceName[i]);
+  // }
+  ```
+
+  ​
 
 ### StreamBuilder
 
@@ -156,7 +228,7 @@ vim  ~/**.dash_Profile**
 
 ### 字节流转换
 
-- ```
+- ```dart
       //dart中的字节流为int数组
   // 转成int数组
       List<int> bytes = utf8.encode(writeHex);

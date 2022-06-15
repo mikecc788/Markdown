@@ -11,7 +11,7 @@
 
 - [x] 方法可行
 
-	## 版本控制
+  ## 版本控制
 
 > 版本管理器
 
@@ -55,6 +55,23 @@ git config --global --list
 Git config --global user.name 'xxx'
 
 git config -- global user.email 33333@email.com
+
+
+
+取消config配置
+
+- 取消代理
+
+  - git config --global --unset http.proxy
+  - git config --global --unset https.proxy
+
+- ​
+
+  ```
+  比如想取消 url.git://.insteadof=https://
+  git config --global --unset url.git://.insteadof
+  查询 git config --list
+  ```
 
 ### origin
 
