@@ -41,13 +41,36 @@ vim  ~/**.dash_Profile**
 
 ## android 运行
 
+### 配置启动页
+
+- 修改AndroidManifest.xml下的
+
+  ```java
+  <meta-data
+          android:name="io.flutter.embedding.android.SplashScreenDrawable"
+          android:resource="@drawable/launch_background"
+   />
+  ```
+
+- 修改res-》drawable-〉backgroud
+
+  ```java
+   <!--    android:gravity="fill" -->  centre
+   <item>
+          <bitmap
+              android:src="@mipmap/launch_image" />
+      </item>
+  ```
+
+- Mipmap-xxxhdpi添加启动页图片 launch_image.png
+
 ### 配置adb
 
 - 打开.bash_profile 文件  vim  ~/**.bash_Profile**
 
 - /Users/feellife/Library/Android/sdk
 
-  ```
+  ```shell
   export ANDROID_HOME=/Users/feellife/Library/Android/sdk
   export PATH=${PATH}:${ANDROID_HOME}/tools
   export PATH=${PATH}:${ANDROID_HOME}/platform-tools
@@ -103,7 +126,8 @@ vim  ~/**.dash_Profile**
 ### 打包apk
 
 1. feellife@apps-iMac feellife_1 % keytool -genkey -v -keystore ~/sign.jks -keyalg RSA -keysize 2048 -validity 10000 -alias sign
-2. flutter build apk
+2. flutter build apk --release
+3. flutter build apk --release --no-sound-null-safety //如果没有适配空安全就打没有空安全的包
 
 ## Dart库
 
@@ -204,7 +228,7 @@ vim  ~/**.dash_Profile**
 
 ### 字节流转换
 
-- ```
+- ```dart
       //dart中的字节流为int数组
   // 转成int数组
       List<int> bytes = utf8.encode(writeHex);
