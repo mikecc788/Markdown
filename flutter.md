@@ -1,3 +1,7 @@
+---
+typora-copy-images-to: ipic
+---
+
 [TOC]
 
 ## 下载sdk
@@ -476,6 +480,20 @@ LogD(new_data);
 
 ### Localization
 
+- 国际化设置
+
+  ```dart
+   #国际化
+    flutter_localizations:
+      sdk: flutter
+    最底部添加 
+    flutter_intl:
+    enabled: true
+  ```
+
+  ![WeChat6c0edf204d73798366053b07850497ef](/Users/feellife/Library/Containers/com.tencent.xinWeChat/Data/Library/Caches/com.tencent.xinWeChat/2.0b4.0.9/4100b5b68703b908e35e8fd25bba4804/dragImgTmp/WeChat6c0edf204d73798366053b07850497ef.png)
+
+
 - #### 占位符传参
 
   有时候文案中的某些部分最开始是不确定的，在运行的时候才能确定。譬如文案中有价格，但是这个价格不是固定的，这时候就需要先用一个占位符占位，然后在运行的时候用真实的数据替换掉这个占位符。
@@ -503,12 +521,43 @@ LogD(new_data);
 
 #### flutter_riverpod
 
-- ```
+- 所有Provider都有一个 "ref "作为参数
+  - 获得一个Provider的值并监听变化，这样，当这个值发生变化时，这将重建订阅该值的Widget或Provider。这是通过ref.watch完成的
+  - 在一个Provider上添加一个监听器，以执行一个action，如导航到一个新的页面或在该Provider发生变化时执行一些操作。这是通过 ref.listen 完成的
+  - 获取一个Provider的值，同时忽略它的变化。当我们在一个事件中需要一个Provider的值时，这很有用，比如 "点击操作"。这是通过ref.read完成的
+
+
+- ```dart
   // Provider 不能实时更新
   final shopProvider = Provider((ref) => ShoppingCart());
   //这个命名可以实时更新
   final shopProvider = ChangeNotifierProvider<ShoppingCart>((ref) => ShoppingCart());
+
   ```
+
+  StateProvider  定义一个全局常量StateProvider  内部实现 
+
+  ```dart
+  class StateProvider<State> extends AlwaysAliveProviderBase<State>
+      with
+          StateProviderOverrideMixin<State>,
+          OverrideWithProviderMixin<StateController<State>,
+              StateProvider<State>> 
+                
+  //定义一个全局常量StateProvider
+  final StateProvider<int> numProvider = StateProvider((_) => 0);
+   final state = ref.watch(numProvider.notifier).state++;//修改值
+  ref.read(numProvider.notifier).state;//读取
+  ```
+
+- stream和future监听 
+
+  ```
+  Stream<User> user = ref.watch(userProvider.stream);
+  Future<User> user = ref.watch(userProvider.future);//该Future以最新发出的值进行解析
+  ```
+
+  ​
 
 ### BLOC
 
