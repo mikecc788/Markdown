@@ -88,6 +88,15 @@ git本地三个工作区域  工作目录（本地文件）、暂存区（add .�
 
 > 工作流程
 
+## 关联远程仓库
+
+- 本地项目初始化 git init
+- git add README.md git commit -m "init first"
+- 关联远程仓库 git remote add origin git@github.com:mikecc788/Swift-algorithm.git
+  - origin会成为远程仓库的名字，可以自行修改
+- git pull origin master --allow-unrelated-histories (该选项可以合并两个独立启动仓库的历史)
+-  git push -u origin master
+
 ## Git命令
 
 - git pull:  git pull 根据配置的不同，可为git fetch + git merge 或 git fetch + git rebase
