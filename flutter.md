@@ -135,6 +135,28 @@ vim  ~/**.dash_Profile**
 
 ## Dart库
 
+### flutter_launcher_icons
+
+- 配置yaml文件 添加一张1024*1024 图片 名字对上就可以 
+
+  ```
+  flutter_icons:
+    image_path: "images/ic_launcher.png"
+    android: "launcher_icon" # can specify file name here e.g. "ic_launcher"
+    ios: false
+  ```
+
+- 输入命令 flutter pub run flutter_launcher_icons:main 生成icon文件
+
+- 报错问题  Cannot not find minSdk from android/app/build.gradle
+
+  ```
+  added flutter.minSdkVersion to android/local.properties.
+  flutter.minSdkVersion=30 // I added here
+  ```
+
+  ​
+
 ### JSON解析
 
 - https://www.jianshu.com/p/a61e0ff22248[^1]
@@ -163,6 +185,23 @@ vim  ~/**.dash_Profile**
     }), /// List.generate 返回的是[] 所以children不需要:[]
     ```
 
+- list 转str
+
+  ```
+   lungData = data.join('');
+  ```
+
+  ​
+
+- 去重 转换为 Set 然后反转为 List
+
+  ```
+  final myNumbers = [1, 2, 3, 3, 4, 5, 1, 1];
+    final uniqueNumbers = myNumbers.toSet().toList();
+  ```
+
+  ​
+
 #### map
 
 - 从数组新增元素 
@@ -182,6 +221,11 @@ vim  ~/**.dash_Profile**
 ### tips  final const
 
 - const 在编译的时候值都必须是确定的  final是在运行的时候才赋值
+
+### @immutable
+
+- 被@immutable注解标明的类或者子类都必须是不可变的
+- 定义到Widget中的数据一定是不可变的，需要用final来修饰
 
 ### 异步编程Future、Stream
 
@@ -407,9 +451,31 @@ routes:{
 
 - 分割线 index%2==0 ？ Divider() 不推荐
 
+- 跟随父列表滚动  
+
+  ```dart
+   physics: NeverScrollableScrollPhysics(),
+  ```
+
+  ​
+
 #### 多选实现
 
 - https://github.com/ritsat/listview_multiselection/blob/master/lib/main.dart
+
+### ExpansionTile
+
+- 改变leading间距 tilePadding: EdgeInsets.zero,
+
+- 去掉分割线 
+
+  ```
+  Theme(
+    data: Theme.of(context).copyWith(dividerColor: Colors.transparent),
+        child: ExpansionTile(
+  ```
+
+  ​
 
 ### SingleChildScrollView
 
@@ -469,6 +535,22 @@ LogD(new_data);
 
 - 设置背景颜色要在切圆角里面
 
+  ```dart
+    decoration: const BoxDecoration(
+            borderRadius: BorderRadius.all(Radius.circular(18)),
+            gradient: LinearGradient(
+              colors: [
+                Color(0xff2c274c),
+                Color(0xff46426c),
+              ],
+              begin: Alignment.bottomCenter,
+              end: Alignment.topCenter,
+            ),
+          ),
+  ```
+
+  ​
+
 
 ### Listener
 
@@ -491,7 +573,7 @@ LogD(new_data);
     enabled: true
   ```
 
-  ![WeChat6c0edf204d73798366053b07850497ef](/Users/feellife/Library/Containers/com.tencent.xinWeChat/Data/Library/Caches/com.tencent.xinWeChat/2.0b4.0.9/4100b5b68703b908e35e8fd25bba4804/dragImgTmp/WeChat6c0edf204d73798366053b07850497ef.png)
+  ![WeChatbe739d91a5da1989da3fa7d2fcc3fc08](https://tva1.sinaimg.cn/large/e6c9d24egy1h3a6p97d9jj20rg0gawfx.jpg)
 
 
 - #### 占位符传参
