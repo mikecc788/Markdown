@@ -88,6 +88,13 @@ git本地三个工作区域  工作目录（本地文件）、暂存区（add .�
 
 > 工作流程
 
+## fork
+
+- Fork 项目上传先在自己github点击 Fetch upstream 同步最新的代码
+- 上传服务器 这里是上传到自己仓库 和原项目没关系 就是普通 add commit push -u origin master 操作
+- 在github上 pull request
+- 
+
 ## Git命令
 
 - git pull:  git pull 根据配置的不同，可为git fetch + git merge 或 git fetch + git rebase
