@@ -1,3 +1,7 @@
+---
+typora-copy-images-to: ipic
+---
+
 [TOC]
 
 ## 下载sdk
@@ -41,6 +45,67 @@ vim  ~/**.dash_Profile**
 
 ## android 运行
 
+### 配置启动页
+
+- 修改AndroidManifest.xml下的
+
+  ```java
+  <meta-data
+          android:name="io.flutter.embedding.android.SplashScreenDrawable"
+          android:resource="@drawable/launch_background"
+   />
+  ```
+
+- 修改res-》drawable-〉backgroud
+
+  ```java
+   <!--    android:gravity="fill" -->  centre
+   <item>
+          <bitmap
+              android:src="@mipmap/launch_image" />
+      </item>
+  ```
+
+- Mipmap-xxxhdpi添加启动页图片 launch_image.png
+
+### 配置adb
+
+- 打开.bash_profile 文件  vim  ~/**.bash_Profile**
+
+- /Users/feellife/Library/Android/sdk
+
+  ```shell
+  export ANDROID_HOME=/Users/feellife/Library/Android/sdk
+  export PATH=${PATH}:${ANDROID_HOME}/tools
+  export PATH=${PATH}:${ANDROID_HOME}/platform-tools
+  ```
+
+-  source ~/.bash_profile
+
+- 配置端口 adb tcpip 7890 
+
+- 连上手机 feellife@apps-iMac ~ % adb connect 192.168.2.2:7890
+
+### 获取MD5 flutter默认不支持
+
+- 获取md5
+
+  ```
+  cd android  
+  ./gradlew signingReport 
+  ```
+
+  ​
+
+- 获取sha1 sha256 
+
+  ```
+  feellife@apps-iMac key % keytool -list -v -keystore sign.jks
+  cd 到sign.jks所在文件夹 执行命令
+  ```
+
+  ​
+
 ### flutter_blue
 
 - Resolve 安卓12 权限 https://github.com/boskokg/flutter_blue_plus/issues/7
@@ -65,9 +130,32 @@ vim  ~/**.dash_Profile**
 ### 打包apk
 
 1. feellife@apps-iMac feellife_1 % keytool -genkey -v -keystore ~/sign.jks -keyalg RSA -keysize 2048 -validity 10000 -alias sign
-2. flutter build apk
+2. flutter build apk --release
+3. flutter build apk --release --no-sound-null-safety //如果没有适配空安全就打没有空安全的包
 
 ## Dart库
+
+### flutter_launcher_icons
+
+- 配置yaml文件 添加一张1024*1024 图片 名字对上就可以 
+
+  ```
+  flutter_icons:
+    image_path: "images/ic_launcher.png"
+    android: "launcher_icon" # can specify file name here e.g. "ic_launcher"
+    ios: false
+  ```
+
+- 输入命令 flutter pub run flutter_launcher_icons:main 生成icon文件
+
+- 报错问题  Cannot not find minSdk from android/app/build.gradle
+
+  ```
+  added flutter.minSdkVersion to android/local.properties.
+  flutter.minSdkVersion=30 // I added here
+  ```
+
+  ​
 
 ### JSON解析
 
@@ -97,7 +185,34 @@ vim  ~/**.dash_Profile**
     }), /// List.generate 返回的是[] 所以children不需要:[]
     ```
 
-- ​
+- list 转str
+
+  ```
+   lungData = data.join('');
+  ```
+
+  ​
+
+- 去重 转换为 Set 然后反转为 List
+
+  ```
+  final myNumbers = [1, 2, 3, 3, 4, 5, 1, 1];
+    final uniqueNumbers = myNumbers.toSet().toList();
+  ```
+
+  ​
+
+#### map
+
+- 从数组新增元素 
+  ```dart
+  // Map map1 = Map();
+  // for (int i = 0; i < preFixArr.length; i++) {
+  // map1.putIfAbsent(preFixArr[i], () => deviceName[i]);
+  // }
+  ```
+
+  ​
 
 ### StreamBuilder
 
@@ -106,6 +221,11 @@ vim  ~/**.dash_Profile**
 ### tips  final const
 
 - const 在编译的时候值都必须是确定的  final是在运行的时候才赋值
+
+### @immutable
+
+- 被@immutable注解标明的类或者子类都必须是不可变的
+- 定义到Widget中的数据一定是不可变的，需要用final来修饰
 
 ### 异步编程Future、Stream
 
@@ -156,7 +276,7 @@ vim  ~/**.dash_Profile**
 
 ### 字节流转换
 
-- ```
+- ```dart
       //dart中的字节流为int数组
   // 转成int数组
       List<int> bytes = utf8.encode(writeHex);
@@ -331,9 +451,31 @@ routes:{
 
 - 分割线 index%2==0 ？ Divider() 不推荐
 
+- 跟随父列表滚动  
+
+  ```dart
+   physics: NeverScrollableScrollPhysics(),
+  ```
+
+  ​
+
 #### 多选实现
 
 - https://github.com/ritsat/listview_multiselection/blob/master/lib/main.dart
+
+### ExpansionTile
+
+- 改变leading间距 tilePadding: EdgeInsets.zero,
+
+- 去掉分割线 
+
+  ```
+  Theme(
+    data: Theme.of(context).copyWith(dividerColor: Colors.transparent),
+        child: ExpansionTile(
+  ```
+
+  ​
 
 ### SingleChildScrollView
 
@@ -393,6 +535,22 @@ LogD(new_data);
 
 - 设置背景颜色要在切圆角里面
 
+  ```dart
+    decoration: const BoxDecoration(
+            borderRadius: BorderRadius.all(Radius.circular(18)),
+            gradient: LinearGradient(
+              colors: [
+                Color(0xff2c274c),
+                Color(0xff46426c),
+              ],
+              begin: Alignment.bottomCenter,
+              end: Alignment.topCenter,
+            ),
+          ),
+  ```
+
+  ​
+
 
 ### Listener
 
@@ -403,6 +561,20 @@ LogD(new_data);
 - Textbutton:  MaterialStateProperty.all()设置属性
 
 ### Localization
+
+- 国际化设置
+
+  ```dart
+   #国际化
+    flutter_localizations:
+      sdk: flutter
+    最底部添加 
+    flutter_intl:
+    enabled: true
+  ```
+
+  ![WeChatbe739d91a5da1989da3fa7d2fcc3fc08](https://tva1.sinaimg.cn/large/e6c9d24egy1h3a6p97d9jj20rg0gawfx.jpg)
+
 
 - #### 占位符传参
 
@@ -431,12 +603,43 @@ LogD(new_data);
 
 #### flutter_riverpod
 
-- ```
+- 所有Provider都有一个 "ref "作为参数
+  - 获得一个Provider的值并监听变化，这样，当这个值发生变化时，这将重建订阅该值的Widget或Provider。这是通过ref.watch完成的
+  - 在一个Provider上添加一个监听器，以执行一个action，如导航到一个新的页面或在该Provider发生变化时执行一些操作。这是通过 ref.listen 完成的
+  - 获取一个Provider的值，同时忽略它的变化。当我们在一个事件中需要一个Provider的值时，这很有用，比如 "点击操作"。这是通过ref.read完成的
+
+
+- ```dart
   // Provider 不能实时更新
   final shopProvider = Provider((ref) => ShoppingCart());
   //这个命名可以实时更新
   final shopProvider = ChangeNotifierProvider<ShoppingCart>((ref) => ShoppingCart());
+
   ```
+
+  StateProvider  定义一个全局常量StateProvider  内部实现 
+
+  ```dart
+  class StateProvider<State> extends AlwaysAliveProviderBase<State>
+      with
+          StateProviderOverrideMixin<State>,
+          OverrideWithProviderMixin<StateController<State>,
+              StateProvider<State>> 
+                
+  //定义一个全局常量StateProvider
+  final StateProvider<int> numProvider = StateProvider((_) => 0);
+   final state = ref.watch(numProvider.notifier).state++;//修改值
+  ref.read(numProvider.notifier).state;//读取
+  ```
+
+- stream和future监听 
+
+  ```
+  Stream<User> user = ref.watch(userProvider.stream);
+  Future<User> user = ref.watch(userProvider.future);//该Future以最新发出的值进行解析
+  ```
+
+  ​
 
 ### BLOC
 
