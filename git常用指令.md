@@ -65,7 +65,7 @@ git config -- global user.email 33333@email.com
   - git config --global --unset http.proxy
   - git config --global --unset https.proxy
 
-- ​
+- 
 
   ```
   比如想取消 url.git://.insteadof=https://
@@ -119,6 +119,8 @@ git本地三个工作区域  工作目录（本地文件）、暂存区（add .�
 - git commit --amend -m "更好的提交日志"  编辑上一次提交
   - 在上次提交中附加一些内容，保持提交日志不变git add . && git commit --amend --no-edit
 
+- 删除本地git仓库 $ rm -rf .git
+
 #### push
 
 - 密码无效配置
@@ -141,7 +143,7 @@ git本地三个工作区域  工作目录（本地文件）、暂存区（add .�
 ### git fetch
 
 - `git fetch`是将远程主机的最新内容拉到本地，用户在检查了以后决定是否合并到工作本机分支中。而`git pull` 则是将远程主机的最新内容拉下来后直接合并
-- ​
+- 
 
 ## GIT文件操作
 
