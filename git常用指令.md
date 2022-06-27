@@ -65,7 +65,7 @@ git config -- global user.email 33333@email.com
   - git config --global --unset http.proxy
   - git config --global --unset https.proxy
 
-- ​
+- 
 
   ```
   比如想取消 url.git://.insteadof=https://
@@ -88,6 +88,14 @@ git本地三个工作区域  工作目录（本地文件）、暂存区（add .�
 
 > 工作流程
 
+
+## fork
+
+- Fork 项目上传先在自己github点击 Fetch upstream 同步最新的代码
+- 上传服务器 这里是上传到自己仓库 和原项目没关系 就是普通 add commit push -u origin master 操作
+- 在github上 pull request
+- 
+
 ## 关联远程仓库
 
 - 本地项目初始化 git init
@@ -96,6 +104,7 @@ git本地三个工作区域  工作目录（本地文件）、暂存区（add .�
   - origin会成为远程仓库的名字，可以自行修改
 - git pull origin master --allow-unrelated-histories (该选项可以合并两个独立启动仓库的历史)
 -  git push -u origin master
+
 
 ## Git命令
 
@@ -109,6 +118,8 @@ git本地三个工作区域  工作目录（本地文件）、暂存区（add .�
 - 本地和远程仓库不同步问题 先git pull origin master
 - git commit --amend -m "更好的提交日志"  编辑上一次提交
   - 在上次提交中附加一些内容，保持提交日志不变git add . && git commit --amend --no-edit
+
+- 删除本地git仓库 $ rm -rf .git
 
 #### push
 
@@ -132,7 +143,7 @@ git本地三个工作区域  工作目录（本地文件）、暂存区（add .�
 ### git fetch
 
 - `git fetch`是将远程主机的最新内容拉到本地，用户在检查了以后决定是否合并到工作本机分支中。而`git pull` 则是将远程主机的最新内容拉下来后直接合并
-- ​
+- 
 
 ## GIT文件操作
 
