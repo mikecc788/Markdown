@@ -43,6 +43,56 @@ vim  ~/**.dash_Profile**
 
 - 国际化报错 （未解决）
 
+
+
+## FireBase
+
+- 安装 CLI https://firebase.google.com/docs/cli?authuser=0&hl=zh#sign-in-test-cli
+
+- 查看版本  `firebase --version` 
+
+- 登录`firebase login`
+
+- ID 98913
+
+- 如果登录失败 编辑bash.profile. export http_proxy=[http://127.0.0.1:7890;export](http://127.0.0.1:1087;export/) https_proxy=http://127.0.0.1:7890
+
+- xcode 运行报错的话 可以在flutter项目ios文件夹下面单独命令行安装pod install  Podfile文件夹 platform :ios, '10.0'注释打开  
+
+- 终端执行命令 不能再flutter项目里面执行无效
+
+  ```
+  dart pub global activate flutterfire_cli
+  flutterfire configure --project=airsmart-35823
+  ```
+
+  ​
+
+### add android app
+
+- [intorduce doc](https://console.firebase.google.com/project/instagram-test-c9877/overview?hl=zh-cn)
+
+
+- /Users/feellife/Desktop/instagram_demo/android/app/build.gradle   defaultConfig找到id
+
+- android/build.gradle dependencies添加依赖项 'com.google.gms:google-services:4.3.12'
+
+- /android/app/build.gradle defaultConfig 添加一行 multiDexEnabled true
+
+- 上传出错 修改规则 有效
+
+  ```
+  service firebase.storage {
+    match /b/{bucket}/o {
+      match /{allPaths=**} {
+        allow read, write: if true;
+      }
+    }
+  }
+  ```
+
+  ​
+
 ## android 运行
 
 ### 配置启动页
@@ -214,6 +264,8 @@ vim  ~/**.dash_Profile**
 
   ​
 
+- 类型转换 `snap.data() as map<String,dynamic>`
+
 ### StreamBuilder
 
 - 异步编程方式 ===通过 Stream 实现每秒钟局部更新数据
@@ -313,6 +365,10 @@ MyPainter(this.snowflake);
 - ​	**向下传递约束 向上传递尺寸**
 - 跳转页面的时候去掉 **MaterialApp** 不然没有返回箭头
 - listview切圆角要和背景图片一起设置
+
+### flexible
+
+- 把屏幕剩余空间按比例分割 比如 SizedBox(width: 100,), 就是减去100再去按比例分割
 
 ### Spacer
 
@@ -454,7 +510,8 @@ routes:{
 - 跟随父列表滚动  
 
   ```dart
-   physics: NeverScrollableScrollPhysics(),
+   physics: NeverScrollableScrollPhysics(),跟随父列表滚动
+  physics: ScrollPhysics(),滚动
   ```
 
   ​
