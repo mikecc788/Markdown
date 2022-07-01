@@ -366,6 +366,11 @@ MyPainter(this.snowflake);
 - 跳转页面的时候去掉 **MaterialApp** 不然没有返回箭头
 - listview切圆角要和背景图片一起设置
 
+### 常用组件
+
+- FittedBox 放大缩小字体 配合Text使用
+- LayoutBuilder 得到父级控件的大小
+
 ### flexible
 
 - 把屏幕剩余空间按比例分割 比如 SizedBox(width: 100,), 就是减去100再去按比例分割
