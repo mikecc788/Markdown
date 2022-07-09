@@ -6,8 +6,6 @@ typora-copy-images-to: ipic
 
 ## 下载sdk
 
-
-
 vim  ~/**.dash_Profile**
 
 **export PATH=/Users/feellite/flutter/bin:$PATH** 
