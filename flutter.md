@@ -729,8 +729,6 @@ LogD(new_data);
   - 添加"CFBundleName" = "flutter demo";
   - 删掉info.plist文件的 <key>CFBundleDisplayName</key><string>Feellife 1</string>
 
-🐛 lfs :: value=[230, 23, 0, 0, 0, 0, 0, 0, 0, 75, 0, 0, 0, 0, 85, 1, 242, 160, 8, 143]
-
 I/flutter ( 2185): │ 🐛 lfs :: 我是蓝牙返回数据 - [0xe6, 0x17, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x4b, 0x00, 0x00, 0x00, 0x00, 0x55, 0x01, 0xf2, 0xa0, 0x08, 0x8f]
 
 https://t66y.com/thread0806.php?fid=7
