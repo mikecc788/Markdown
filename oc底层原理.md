@@ -18,8 +18,6 @@ typora-copy-images-to: ipic
 
 Test1[^1]
 
-[^1]: 解释test1
-
 Demo[^2]
 
 [^2]: demo2
@@ -798,8 +796,51 @@ objc_msgSendSuper2 {
 - 成员变量
   - ivar_getName 获取私有成员名称 kvc再去修改
   - class_copyIvarList //获取成员变量列表
-- 方法
 
+- 方法 
 
+- 参数类型[^1]
 
+  ```objective-c
+  class_addMethod([self class], sel, class_getMethodImplementation(self,@selector(startEngine:)), "v@:@"); 
+  ```
 
+  - 判断方法已实现就调用原来方法 未实现就交换
+
+    ```objective-c
+    + (void)load{
+        static dispatch_once_t onceToken;
+        dispatch_once(&onceToken, ^{
+        
+          Method method1 = class_getInstanceMethod(self, @selector(eat));
+          Method method2 = class_getInstanceMethod(self, @selector(anotherEat));
+            //把原始方法名传到要改的方法
+            BOOL didAddMethod =  class_addMethod(self, @selector(eat), method_getImplementation(method2), method_getTypeEncoding(method2));
+            if (didAddMethod) {
+                //用新的方法替换原来的方法  而并没有改变Father类中eat方法的具体实现 
+                    class_replaceMethod(self,
+                    @selector(anotherEat),
+                    method_getImplementation(method1),
+                    method_getTypeEncoding(method1));
+                }else{
+                    method_exchangeImplementations(method1, method2);
+                }
+        });
+    }
+    //判断当前类是否是son 从而可以和父类区分开来 一个方法两种实现
+    - (void)anotherEat{
+      NSLog(@"self:%@", self);
+        if ([self isKindOfClass:[son class]]) {
+            NSLog(@"-----son");
+           NSLog(@"替换之后的吃的方法...");
+        }else{
+            [self anotherEat];
+        }
+    }
+    ```
+
+    ​
+
+  - ​
+
+[^1]: ![F047D17B-3F1B-4F21-B60D-33BDE34AEC4C](/var/folders/29/9z71rmy546j6xy105qtf2z3c0000gn/T/abnerworks.Typora/F047D17B-3F1B-4F21-B60D-33BDE34AEC4C.png)
