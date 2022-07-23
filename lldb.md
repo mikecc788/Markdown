@@ -1,8 +1,22 @@
+---
+typora-copy-images-to: ipic
+---
+
 [TOC]
 
 ## LLVM
 
-> oc->中间代码->汇编
+![BAC59436-4539-4924-875F-64D75CB0B6F6](https://tva1.sinaimg.cn/large/e6c9d24egy1h4h0i0se2wj217e0h6jt0.jpg)
+
+> oc->中间代码->汇编  is a compliler [kəmˈpaɪlər]
+
+
+
+source code - > lexical Analyzer  [ˈleksɪkl] 词汇 -> Syntax Analyzer  [ˈsɪntæks]语法分析-> semantic Analyzer  [si'mæntik] ->AST
+
+### clang
+
+- Clang是LLVM的框架的一部分，是它的一个C/C++的前端
 
 ## 常用指令
 
