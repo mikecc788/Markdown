@@ -93,6 +93,10 @@ vim  ~/**.dash_Profile**
 
 ## android 运行
 
+### AS常用快捷键
+
+- opt + cmd + ←  回退到上一次编辑
+
 ### 配置启动页
 
 - 修改AndroidManifest.xml下的
@@ -157,7 +161,8 @@ vim  ~/**.dash_Profile**
 ### flutter_blue
 
 - Resolve 安卓12 权限 https://github.com/boskokg/flutter_blue_plus/issues/7
-- ​
+- 蓝牙反复通知的问题 断开的时候监听那里取消通知[refer](https://segmentfault.com/a/1190000037495356?sort=votes)
+- Resolve send duplicate notify when reconnected [issue525](https://github.com/pauldemarco/flutter_blue/issues/525#issuecomment-734281294)
 
 ### 解决flutter镜像问题
 
@@ -182,6 +187,10 @@ vim  ~/**.dash_Profile**
 3. flutter build apk --release --no-sound-null-safety //如果没有适配空安全就打没有空安全的包
 
 ## Dart库
+
+### 添加代码模版
+
+![7F8CCD4A-5223-45F7-A2A8-92A373185B5C](https://tva1.sinaimg.cn/large/e6c9d24egy1h4rcor0vuaj21760u0781.jpg)
 
 ### flutter_launcher_icons
 
@@ -369,6 +378,41 @@ MyPainter(this.snowflake);
 - FittedBox 放大缩小字体 配合Text使用
 - LayoutBuilder 得到父级控件的大小
 
+### navigator
+
+- 处理系统事件
+
+[使用1](https://developer.aliyun.com/article/918784)
+
+
+
+#### 命名路由
+
+> 这种方式原生并不支持直接解析路由参数
+
+```dart
+ // 路由表  
+routes: {
+  '/': (context) => HomeScreen(),
+  '/details': (context) => DetailScreen(),
+},
+//跳转
+Navigator.pushNamed(
+  context,
+  '/details',
+);
+```
+
+- #### 结合onGenerateRoute使用
+
+#### 2.0路由
+
+### ChoiceChip
+
+### PopupMenu
+
+- 弹出菜单栏
+
 ### flexible
 
 - 把屏幕剩余空间按比例分割 比如 SizedBox(width: 100,), 就是减去100再去按比例分割
@@ -377,6 +421,14 @@ MyPainter(this.snowflake);
 
 - `Spacer()` 相当于弹簧的效果,使两个控件之间的距离达到最大值. (在页面不可滑动时才有效果)
 - ​
+
+### showSearch
+
+- 搜索框
+
+### Stepper
+
+- 步骤列表
 
 ### context
 
@@ -430,6 +482,12 @@ routes:{
 - 可以添加 onTap点击方法
 
 ### 动画
+
+- 空安全可以使用late初始化 不用写在initstate
+
+```dart
+late AnimationController _controller = AnimationController(vsync: this);
+```
 
 - `Animation`的使用需要配合`AnimationController`  `AnimationController`需要一个`TickerProvider`
 
@@ -488,7 +546,11 @@ routes:{
   - **MainAxisAlignment.spaceEvenly**主轴空白区域均分，使各个子控件间距相等
 - crossAxisAlignment: CrossAxisAlignment.stretch, 水平的，默认起始位置在中间
   - **CrossAxisAlignment.stretch** 使子控件填满交叉轴
-- ​
+
+### Column 里面放一个横向滚动的列表
+
+- Fun1  ：利用横向row实现
+- fun2： stack+listviewbuild实现  stack先用一个widget确定宽高设置透明（这个用来向上传递尺寸的作用 不做显示） 其余的利用positon覆盖（positon可以利用最先的widget的大小）
 
 ### GridView
 

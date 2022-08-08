@@ -40,7 +40,7 @@ $$sum_{i=1}^n a_i=0$$
 
 $$sum$$
 
-## C++
+## C++   
 
 ```shell
 feellife@apps-iMac isa指针01 % xcrun -sdk iphoneos clang -arch arm64 -rewrite-objc main.m 
@@ -575,6 +575,13 @@ struct __main_block_impl_0 {
   //block里加了一个strong 这样的话又使得 Self 的returnCount + 1
   __strong __typeof(weakSelf)strongSelf = weakSelf;
 
+  //假若 Block 函数体在执行期间, self 被 dealloc, 此时函数体中可能出现前半部分 weakSelf 有效, 后半部分则变成 weakSlef==nil 的情况, 可能会导致 crash. 此时在 Block 中引入 用 __strong 修饰的 strongSelf, 相当于函数体中 self 不会因为外部操作而被强制置空. 当函数体执行完毕, strongSelf 因为作用域的结束而置空, 解除引用关系  使用 strongSelf 提高安全性
+  __weak __typeof(self)weakSelf = self;
+  Block(param)
+  ^{
+        __strong __typeof(weakSelf)strongSelf = weakSelf; 
+        // Do stuff
+  });
   ```
 
   ​
