@@ -101,7 +101,7 @@ typora-copy-images-to: ipic
 
 
 
-## Masonry框架
+## Masonry
 
 - 为什么不会强引用
   - 内部没有self调用  只是调用了一个block方法 block(constraintMaker);
@@ -124,13 +124,130 @@ Podfile.lock
 
 - 解决依赖库版本不一致的问题
 
+## CommonSuper
+
+```objective-c
+-(Class)classA:(Class)clsA andClassB:(Class)clsB{
+    NSArray *aa1  = [self findSuperViews:clsA];
+    NSArray *aa2  = [self findSuperViews:clsB];
+    NSInteger arrCount =  aa1.count <  aa2.count ? aa1.count:aa2.count;
+    Class result;
+    for (NSInteger i =0;i < arrCount;i++) {
+        Class claA = aa1[i];
+        Class claB =  aa2[i];
+        NSLog(@"A=%@====B=%@",claA,claB);
+        if ( claA == claB ) {
+            result = claA;
+            break;
+        }
+    }
+    return  result;
+}
+- (NSArray*)findSuperViews:(Class)class {
+    if (class == nil) {
+        return  @[];
+    }
+    NSMutableArray *result = [NSMutableArray array];
+    while (class != nil) {
+        [result addObject:class];
+        class = [class superclass];
+    }
+    return [result copy];
+}
+```
+
+
+
+## Response Chain
+
+Note:UIControl会截断处理
+
+- 处理视图之外的响应
+
+  - B是A的子视图 红框超出部分不能点击 可以修改A的事件hit-Testing 把坐标转移到B上
+
+    ```objective-c
+    //A view code
+    - (instancetype)initWithCoder:(NSCoder *)coder{
+        self = [super initWithCoder:coder];
+        if (self) {
+            for (id subView in self.subviews) {
+                if ([subView isKindOfClass:[BView class]]) {
+                    _BView = subView;
+                    break;
+                }
+            }
+        }
+        return self;
+    }
+    -(BOOL)pointInside:(CGPoint)point withEvent:(UIEvent *)event{
+        //将触摸点坐标转换到在B上的坐标
+        CGPoint pointTemp = [self convertPoint:point toView:_BView];
+        if ([_BView pointInside:pointTemp withEvent:event]) {
+            return YES;
+        }
+        //否则返回默认的操作
+        return [super pointInside:point withEvent:event];
+    }
+    ```
+
+    ​
+
+  ![528558DD-C728-4990-8D87-174E2B622579](https://tva1.sinaimg.cn/large/e6c9d24egy1h52p2vdqqmj20fm0bqjrl.jpg)
+
+- 事件的传递顺序
+
+  - UITextField ——> UIView ——> UIView ——> UIViewController ——> UIWindow ——> UIApplication ——> UIApplicationDelegation
+
+- ​
+
 ## HttpS
+
+对称加密 
+
+> 一对1
+
+- 共同拥有一个密钥  双方加解密
+
+非对称加密
+
+> 场景 1对多的情况  
+
+- 使用两个密钥 公钥和私钥 RSA算法 
+- 利用public key在网络上随便传递
+- 本地保留私钥加密数据 利用对方的公钥解密
+
+中间人攻击 截获 AB公钥 发送假消息  保证公钥不被截获 需要CA验证公钥真实性
+
+1. 保证A、B和CA之间的通信不被截获
+   - CA直接继承在操作系统和浏览器里面  AB不用网络即可获取
+
+流程就是 A->Public key-> CA  <-public key<-B
 
 SSL
 
 - 证书机构
 
 TSL: **Transport Layer Security** 传输安全层
+
+- private 
+  - 私钥仅仅签名身份认证使用
+- public
+  - 利用对端的公钥加密数据
+
+get
+
+- 只被用于获取数据 因为读取数据，所以可以用来做缓存
+- 长度受限于url 实际
+
+post
+
+- 发送表单信息
+- 带body传输数据 相对安全一点 实际安全度由https决定
+
+
+
+
 
 
 
