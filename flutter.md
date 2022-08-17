@@ -161,8 +161,21 @@ vim  ~/**.dash_Profile**
 ### flutter_blue
 
 - Resolve 安卓12 权限 https://github.com/boskokg/flutter_blue_plus/issues/7
+
 - 蓝牙反复通知的问题 断开的时候监听那里取消通知[refer](https://segmentfault.com/a/1190000037495356?sort=votes)
+
 - Resolve send duplicate notify when reconnected [issue525](https://github.com/pauldemarco/flutter_blue/issues/525#issuecomment-734281294)
+
+- timeout有问题
+
+  ```dart
+  error
+  // flutterBlue.startScan(timeout: scanTimeout); 
+  timeout写在外面 用系统自带的
+  flutterBlue.startScan().timeout(scanTimeout);  
+  ```
+
+  ​
 
 ### 解决flutter镜像问题
 
