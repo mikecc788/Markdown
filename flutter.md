@@ -33,6 +33,15 @@ vim  ~/**.dash_Profile**
 
 ## iOS 运行
 
+```
+// com.example.feellife1
+com.lfs.ibreathe.ble
+
+
+```
+
+
+
 ### 生成iOS文件夹
 
 - ```
@@ -41,6 +50,11 @@ vim  ~/**.dash_Profile**
 
 - 国际化报错 （未解决）
 
+
+### iOS 启动页
+
+- view里面设置启动图片
+- 设置view的背景色 默认白色 而且比较早
 
 
 ## FireBase
@@ -142,9 +156,13 @@ vim  ~/**.dash_Profile**
 
 - 获取md5
 
+  - [下载wx tool](https://blog.csdn.net/qq2276031/article/details/126123912)
+
   ```
   cd android  
-  ./gradlew signingReport 
+  ./gradlew signingReport  //好像有问题
+
+  7503756F5778729790781A517D5A0C01
   ```
 
   ​
@@ -175,7 +193,39 @@ vim  ~/**.dash_Profile**
   flutterBlue.startScan().timeout(scanTimeout);  
   ```
 
-  ​
+- release版本蓝牙搜索不到 混淆代码忽略了 
+
+  ```java
+  minifyEnabled false //删除无用代码
+  useProguard false    //代码压缩设置
+  shrinkResources false //删除无用资源
+  ```
+
+  [release issue](https://github.com/pauldemarco/flutter_blue/issues/768)
+
+### 代码混淆
+
+1. you will need to create the proguards rules file at  android/app/proguard-rules.pro
+
+   - In this file add the proguard rules as  
+
+     ```dart
+     -keep class com.pauldemarco.flutter_blue.Protos* { *; }
+
+     //-keep class com.pauldemarco.flutter_blue.* { *; }
+     ```
+
+2. Go into the `android/app/build.gradle` file and add the `proguardFiles`
+
+   ```Fav
+   android {
+       release {
+           proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+       }
+   }
+   ```
+
+   ​
 
 ### 解决flutter镜像问题
 
@@ -196,8 +246,11 @@ vim  ~/**.dash_Profile**
 ### 打包apk
 
 1. feellife@apps-iMac feellife_1 % keytool -genkey -v -keystore ~/sign.jks -keyalg RSA -keysize 2048 -validity 10000 -alias sign
-2. flutter build apk --release
-3. flutter build apk --release --no-sound-null-safety //如果没有适配空安全就打没有空安全的包
+2. 上面指令可能报错 下面这条
+   - feellife@apps-iMac feellife_1 % keytool -genkey -v -keystore ~/feellife-keystore.jks -keyalg RSA -keysize 2048 -validity 10000 -alias feellife -storetype JKS
+     -  -alias feellife -storetype JKS  feellife为 keyAlias名称
+3. flutter build apk --release
+4. flutter build apk --release --no-sound-null-safety //如果没有适配空安全就打没有空安全的包
 
 ## Dart库
 
@@ -420,7 +473,31 @@ Navigator.pushNamed(
 
 #### 2.0路由
 
+### bottom_nav_bar
+
+- 常用库 persistent_bottom_nav_bar_v2
+
+  ```dart
+  NavBarStyle _navBarStyle = NavBarStyle.style15; 设置样式
+    onItemSelected: (index){}//设置点击事件
+  主页面不要设置appbar 每个页面单独设置
+  ```
+
+  ​
+
+### snackbar
+
+- another_flushbar: ^1.10.29
+- flash: ^2.0.3+3
+
 ### ChoiceChip
+
+### Overlay
+
+> `Overlay`是一个可以管理的堆栈,通过将一个Widget插入这个堆栈中，这样就可以让此`Widget`浮在其他的`Widget`之上，从而实现悬浮窗效果
+
+- OverlayEntry对象的配置来管理Overlay的层级关系
+- ​
 
 ### PopupMenu
 
@@ -694,6 +771,7 @@ LogD(new_data);
 ### Button
 
 - Textbutton:  MaterialStateProperty.all()设置属性
+- Shape 设置圆角
 
 ### Localization
 
@@ -784,7 +862,18 @@ LogD(new_data);
 
 - [x] fluwx
       - no_pay版本
+
+refer [登陆配置](https://blog.csdn.net/haoxuhong/article/details/117956586)
+
+#### ios端
+
+- 证书页面 需要打开 Associated Domains
+
 - [ ] ​
+
+### 启动页
+
+- iOS 启动页白屏 添加1x 2x 3x图片 设置leading  traing top和bottom注意父视图设置成view 也可以解决顶部留白问题
 
 ### app名称国际化
 
@@ -804,8 +893,9 @@ LogD(new_data);
   - 添加"CFBundleName" = "flutter demo";
   - 删掉info.plist文件的 <key>CFBundleDisplayName</key><string>Feellife 1</string>
 
-I/flutter ( 2185): │ 🐛 lfs :: 我是蓝牙返回数据 - [0xe6, 0x17, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x4b, 0x00, 0x00, 0x00, 0x00, 0x55, 0x01, 0xf2, 0xa0, 0x08, 0x8f]
 
 https://t66y.com/thread0806.php?fid=7
+
+//https://www.cnki.net/
 
 [^1]: 原生解析 

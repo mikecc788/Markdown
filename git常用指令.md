@@ -2,6 +2,18 @@
 
 # Git使用
 
+## SSH问题
+
+- git@github.com: Permission denied (publickey).
+
+  - 生成SSH Key [ssh key](http://www.icodebang.com/article/323066.html)
+
+- remote: Permission to 一台电脑同时多个github账号 指定一个上传
+
+  [step](https://blog.csdn.net/luolianxi/article/details/106483748)
+
+- ​
+
 ## 443报错
 
 1. 可能DNS污染 修改host   
@@ -65,7 +77,7 @@ git config -- global user.email 33333@email.com
   - git config --global --unset http.proxy
   - git config --global --unset https.proxy
 
-- 
+- ​
 
   ```
   比如想取消 url.git://.insteadof=https://
@@ -94,7 +106,7 @@ git本地三个工作区域  工作目录（本地文件）、暂存区（add .�
 - Fork 项目上传先在自己github点击 Fetch upstream 同步最新的代码
 - 上传服务器 这里是上传到自己仓库 和原项目没关系 就是普通 add commit push -u origin master 操作
 - 在github上 pull request
-- 
+- ​
 
 ## 关联远程仓库
 
@@ -103,7 +115,7 @@ git本地三个工作区域  工作目录（本地文件）、暂存区（add .�
 - 关联远程仓库 git remote add origin git@github.com:mikecc788/Swift-algorithm.git
   - origin会成为远程仓库的名字，可以自行修改
 - git pull origin master --allow-unrelated-histories (该选项可以合并两个独立启动仓库的历史)
--  git push -u origin master
+- git push -u origin master
 
 
 ## Git命令
@@ -143,7 +155,7 @@ git本地三个工作区域  工作目录（本地文件）、暂存区（add .�
 ### git fetch
 
 - `git fetch`是将远程主机的最新内容拉到本地，用户在检查了以后决定是否合并到工作本机分支中。而`git pull` 则是将远程主机的最新内容拉下来后直接合并
-- 
+- ​
 
 ## GIT文件操作
 
