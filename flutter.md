@@ -40,7 +40,9 @@ com.lfs.ibreathe.ble
 
 ```
 
+### 本地网络配置
 
+- flutter ios Local Network Privacy Permissions
 
 ### 生成iOS文件夹
 
@@ -439,6 +441,11 @@ MyPainter(this.snowflake);
 - 跳转页面的时候去掉 **MaterialApp** 不然没有返回箭头
 - listview切圆角要和背景图片一起设置
 
+### 下载地址
+
+- https://appgallery.huawei.com/app/C106428933 华为应用商店 吸哈
+- ​
+
 ### 常用组件
 
 - FittedBox 放大缩小字体 配合Text使用
@@ -467,6 +474,11 @@ Navigator.pushNamed(
   context,
   '/details',
 );
+
+//报错 Flutter : Could not find a generator for route RouteSettings("/HomePage", null) in the _WidgetsAppState
+使用 Navigator.of(context, rootNavigator: true).pushNamed("/route");
+而不是Navigator.pushNamed("/route");
+rootNavigator 应用场景嵌套导航器
 ```
 
 - #### 结合onGenerateRoute使用
@@ -532,21 +544,6 @@ Navigator.pushNamed(
 ### IndexedStack
 
 - 可以在几个页面切换的页面使用  设置currentIndex
-
-### Router
-
-类似放盘子
-
-- push 入栈  
-- pop 出 
-
-#### 命名路由
-
-routes:{	
-
-​	'/home':(context)=>Home(),
-
-}
 
 ### 页面保活
 
