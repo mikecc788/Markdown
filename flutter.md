@@ -205,6 +205,10 @@ com.lfs.ibreathe.ble
 
   [release issue](https://github.com/pauldemarco/flutter_blue/issues/768)
 
+- 设置MTU
+
+  https://github.com/pauldemarco/flutter_blue/issues/902
+
 ### 代码混淆
 
 1. you will need to create the proguards rules file at  android/app/proguard-rules.pro
@@ -253,6 +257,26 @@ com.lfs.ibreathe.ble
      -  -alias feellife -storetype JKS  feellife为 keyAlias名称
 3. flutter build apk --release
 4. flutter build apk --release --no-sound-null-safety //如果没有适配空安全就打没有空安全的包
+
+### 权限请求报错
+
+main.xml 加上xmlns:tools="http://schemas.android.com/tools"
+
+### 清除打印信息
+
+```
+flutter run | grep -v "D/ViewRootImpl" 
+flutter logs //可行
+```
+
+- logcat
+
+  ```dart
+  package:mine level:DEBUG 过滤Debug可以输入
+  package:mine    -tag:<D/FlutterBluePlugin>  level:DEBUG 
+  ```
+
+  ​
 
 ## Dart库
 
@@ -325,7 +349,19 @@ com.lfs.ibreathe.ble
     final uniqueNumbers = myNumbers.toSet().toList();
   ```
 
-  ​
+- 计算平均值
+
+  [stack](https://stackoverflow.com/questions/54441296/flutter-how-do-calculate-average-the-data-in-list)
+
+####多项式
+
+- equations: ^4.1.0 
+
+https://pub.dev/documentation/scidart/latest/numdart/PolyFit-class.html
+
+### 去除空安全打印警告
+
+https://blog.csdn.net/AllThePain/article/details/125658530
 
 #### map
 
@@ -410,6 +446,8 @@ com.lfs.ibreathe.ble
       print("bytes:$bytes");
   // 转回来
       String r = utf8.decode(bytes);
+  //bytedata 
+  https://api.dart.dev/stable/1.10.1/dart-typed_data/ByteData-class.html
   ```
 
 
@@ -430,6 +468,11 @@ com.lfs.ibreathe.ble
 List<Snowflake>? snowflake; //接收参数 
 MyPainter(this.snowflake);
 ```
+
+## UI study
+
+- [Flutter_deer ](https://github.com/simplezhli/flutter_deer)
+- ​
 
 ## 组件Widget
 
