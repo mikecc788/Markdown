@@ -109,6 +109,11 @@ com.lfs.ibreathe.ble
 
 ## android 运行
 
+### 审核
+
+- //本"吸哈"应用"体验-保健-任意文章下的往期推荐”页面存在定向广告但不涉及广告内容的个性化推送,因此不做显著标识。推荐广告内容向所有用户展示，非个性化推荐/定向推送
+- 后续提交审核时请在备注栏内说明“应用内推荐模块不涉及算法推送，推荐内容向所有用户展示，非个性化推荐/定向推送”
+
 ### AS常用快捷键
 
 - opt + cmd + ←  回退到上一次编辑
@@ -281,6 +286,8 @@ flutter logs //可行
 ## Dart库
 
 ### 添加代码模版
+
+[Live Templates添加代码模版](https://www.jianshu.com/p/dc5cd0c40f93)
 
 ![7F8CCD4A-5223-45F7-A2A8-92A373185B5C](https://tva1.sinaimg.cn/large/e6c9d24egy1h4rcor0vuaj21760u0781.jpg)
 
@@ -583,6 +590,10 @@ rootNavigator 应用场景嵌套导航器
 ### slivers
 
 - SliverGrid  SliverToBoxAdapter SliverList搭配使用
+
+- spacer（）和
+
+  ​
 
 ### IndexedStack
 
@@ -909,7 +920,7 @@ refer [登陆配置](https://blog.csdn.net/haoxuhong/article/details/117956586)
 
 - 证书页面 需要打开 Associated Domains
 
-- [ ] ​
+- [ ] 
 
 ### 启动页
 
