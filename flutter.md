@@ -40,6 +40,12 @@ com.lfs.ibreathe.ble
 
 ```
 
+## google账号申请
+
+- 注册 Google 账号
+- 进入开发者链接（<https://play.google.com/apps/publish/signup>），登录 Google 账号。
+- 付费 25 美元。需要 VISA 或 Master 等信用卡
+
 ### 本地网络配置
 
 - flutter ios Local Network Privacy Permissions
@@ -214,6 +220,15 @@ com.lfs.ibreathe.ble
 
   https://github.com/pauldemarco/flutter_blue/issues/902
 
+- 解决3.11.4问题
+
+  ```
+  https://github.com/protocolbuffers/protobuf/issues/8062
+  要用安卓运行  才能看到flutter_blue的gradle 
+  ```
+
+  ​
+
 ### 代码混淆
 
 1. you will need to create the proguards rules file at  android/app/proguard-rules.pro
@@ -241,9 +256,6 @@ com.lfs.ibreathe.ble
 ### 解决flutter镜像问题
 
 ### 解决m1芯片插件问题
-
-- https://github.com/protocolbuffers/protobuf/issues/8062
-
 
 - https://blog.csdn.net/m0_37780940/article/details/116646620
 
@@ -943,6 +955,24 @@ refer [登陆配置](https://blog.csdn.net/haoxuhong/article/details/117956586)
 
   - 添加"CFBundleName" = "flutter demo";
   - 删掉info.plist文件的 <key>CFBundleDisplayName</key><string>Feellife 1</string>
+
+
+### 底部导航栏沉浸
+
+```
+main() {
+  runApp(MyApp());
+  
+  if (Platform.isAndroid) {
+    SystemUiOverlayStyle systemUiOverlayStyle = SystemUiOverlayStyle(
+        statusBarColor: Colors.transparent,
+        systemNavigationBarColor: "#2196f3".toColor); 
+    SystemChrome.setSystemUIOverlayStyle(systemUiOverlayStyle);
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
+  }
+}
+```
+
 
 
 https://t66y.com/thread0806.php?fid=7

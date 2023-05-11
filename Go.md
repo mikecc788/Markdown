@@ -2,11 +2,24 @@
 [TOC]
 
 # Go
-## Header 2
-### Header 3
-#### Header 4
-##### Header 5
-###### Header 6
+## mac环境配置
+
+```shell
+查询版本
+feellife@iMac ~ % go version
+go version go1.18.3 darwin/arm64
+3. 配置 go的环境变量
+feellife@iMac ~ % vim ~/.zshrc
+export PATH=$PATH:/usr/local/go/bin
+//安装前需要打开代理
+feellife@iMac ~ %  go env -w GO111MODULE=on
+feellife@iMac ~ % o env -w GOPROXY=https://goproxy.io,direc
+vscode shift+command+p 搜索:>Go: Insatall/Update Tools 全选后确定,
+
+```
+
+
+
 # Text Style
 
 **Bold**
@@ -56,7 +69,7 @@ Cell(3,1)  | Cell(3,2)  |  Cell(3,3)
 
 
 ```
-## ### 安装sdk
+# 安装sdk
 
 - go.dev 
 
