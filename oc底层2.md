@@ -150,7 +150,7 @@ struct __CFRunLoopMode {
         NSLog(@"1");
     });
     NSLog(@"2");
-//   dispatch_sync(dispatch_get_main_queue(), ^任务块需要 1完成打印才能返回  打印1又在任务块的后面 同步又是按顺序来执行 所以相互等待
+//   dispatch_sync(dispatch_get_main_queue(), ^任务块需要 1完成打印才能返回(这里与打印没有任何关系 是dispatch_sync这个队列与block块之间的相互等待)  打印1又在任务块的后面 同步又是按顺序来执行 所以相互等待
 }
 ```
 
