@@ -154,8 +154,6 @@ struct __CFRunLoopMode {
 }
 ```
 
-![C4B7E751-3007-4283-BF9E-64156104F983](https://tva1.sinaimg.cn/large/e6c9d24egy1h4dc9qi7zaj21rk0ho40b.jpg)
-
 #### 异步  不会阻塞调用线程 
 
 ```objective-c
