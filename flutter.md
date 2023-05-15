@@ -33,6 +33,23 @@ vim  ~/**.dash_Profile**
 
 ## iOS 运行
 
+```
+// com.example.feellife1
+com.lfs.ibreathe.ble
+
+
+```
+
+## google账号申请
+
+- 注册 Google 账号
+- 进入开发者链接（<https://play.google.com/apps/publish/signup>），登录 Google 账号。
+- 付费 25 美元。需要 VISA 或 Master 等信用卡
+
+### 本地网络配置
+
+- flutter ios Local Network Privacy Permissions
+
 ### 生成iOS文件夹
 
 - ```
@@ -41,6 +58,11 @@ vim  ~/**.dash_Profile**
 
 - 国际化报错 （未解决）
 
+
+### iOS 启动页
+
+- view里面设置启动图片
+- 设置view的背景色 默认白色 而且比较早
 
 
 ## FireBase
@@ -93,6 +115,11 @@ vim  ~/**.dash_Profile**
 
 ## android 运行
 
+### 审核
+
+- //本"吸哈"应用"体验-保健-任意文章下的往期推荐”页面存在定向广告但不涉及广告内容的个性化推送,因此不做显著标识。推荐广告内容向所有用户展示，非个性化推荐/定向推送
+- 后续提交审核时请在备注栏内说明“应用内推荐模块不涉及算法推送，推荐内容向所有用户展示，非个性化推荐/定向推送”
+
 ### AS常用快捷键
 
 - opt + cmd + ←  回退到上一次编辑
@@ -142,9 +169,13 @@ vim  ~/**.dash_Profile**
 
 - 获取md5
 
+  - [下载wx tool](https://blog.csdn.net/qq2276031/article/details/126123912)
+
   ```
   cd android  
-  ./gradlew signingReport 
+  ./gradlew signingReport  //好像有问题
+
+  7503756F5778729790781A517D5A0C01
   ```
 
   ​
@@ -161,15 +192,70 @@ vim  ~/**.dash_Profile**
 ### flutter_blue
 
 - Resolve 安卓12 权限 https://github.com/boskokg/flutter_blue_plus/issues/7
+
 - 蓝牙反复通知的问题 断开的时候监听那里取消通知[refer](https://segmentfault.com/a/1190000037495356?sort=votes)
+
 - Resolve send duplicate notify when reconnected [issue525](https://github.com/pauldemarco/flutter_blue/issues/525#issuecomment-734281294)
+
+- timeout有问题
+
+  ```dart
+  error
+  // flutterBlue.startScan(timeout: scanTimeout); 
+  timeout写在外面 用系统自带的
+  flutterBlue.startScan().timeout(scanTimeout);  
+  ```
+
+- release版本蓝牙搜索不到 混淆代码忽略了 
+
+  ```java
+  minifyEnabled false //删除无用代码
+  useProguard false    //代码压缩设置
+  shrinkResources false //删除无用资源
+  ```
+
+  [release issue](https://github.com/pauldemarco/flutter_blue/issues/768)
+
+- 设置MTU
+
+  https://github.com/pauldemarco/flutter_blue/issues/902
+
+- 解决3.11.4问题
+
+  ```
+  https://github.com/protocolbuffers/protobuf/issues/8062
+  要用安卓运行  才能看到flutter_blue的gradle 
+  ```
+
+  ​
+
+### 代码混淆
+
+1. you will need to create the proguards rules file at  android/app/proguard-rules.pro
+
+   - In this file add the proguard rules as  
+
+     ```dart
+     -keep class com.pauldemarco.flutter_blue.Protos* { *; }
+
+     //-keep class com.pauldemarco.flutter_blue.* { *; }
+     ```
+
+2. Go into the `android/app/build.gradle` file and add the `proguardFiles`
+
+   ```Fav
+   android {
+       release {
+           proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+       }
+   }
+   ```
+
+   ​
 
 ### 解决flutter镜像问题
 
 ### 解决m1芯片插件问题
-
-- https://github.com/protocolbuffers/protobuf/issues/8062
-
 
 - https://blog.csdn.net/m0_37780940/article/details/116646620
 
@@ -183,12 +269,37 @@ vim  ~/**.dash_Profile**
 ### 打包apk
 
 1. feellife@apps-iMac feellife_1 % keytool -genkey -v -keystore ~/sign.jks -keyalg RSA -keysize 2048 -validity 10000 -alias sign
-2. flutter build apk --release
-3. flutter build apk --release --no-sound-null-safety //如果没有适配空安全就打没有空安全的包
+2. 上面指令可能报错 下面这条
+   - feellife@apps-iMac feellife_1 % keytool -genkey -v -keystore ~/feellife-keystore.jks -keyalg RSA -keysize 2048 -validity 10000 -alias feellife -storetype JKS
+     -  -alias feellife -storetype JKS  feellife为 keyAlias名称
+3. flutter build apk --release
+4. flutter build apk --release --no-sound-null-safety //如果没有适配空安全就打没有空安全的包
+
+### 权限请求报错
+
+main.xml 加上xmlns:tools="http://schemas.android.com/tools"
+
+### 清除打印信息
+
+```
+flutter run | grep -v "D/ViewRootImpl" 
+flutter logs //可行
+```
+
+- logcat
+
+  ```dart
+  package:mine level:DEBUG 过滤Debug可以输入
+  package:mine    -tag:<D/FlutterBluePlugin>  level:DEBUG 
+  ```
+
+  ​
 
 ## Dart库
 
 ### 添加代码模版
+
+[Live Templates添加代码模版](https://www.jianshu.com/p/dc5cd0c40f93)
 
 ![7F8CCD4A-5223-45F7-A2A8-92A373185B5C](https://tva1.sinaimg.cn/large/e6c9d24egy1h4rcor0vuaj21760u0781.jpg)
 
@@ -257,7 +368,19 @@ vim  ~/**.dash_Profile**
     final uniqueNumbers = myNumbers.toSet().toList();
   ```
 
-  ​
+- 计算平均值
+
+  [stack](https://stackoverflow.com/questions/54441296/flutter-how-do-calculate-average-the-data-in-list)
+
+####多项式
+
+- equations: ^4.1.0 
+
+https://pub.dev/documentation/scidart/latest/numdart/PolyFit-class.html
+
+### 去除空安全打印警告
+
+https://blog.csdn.net/AllThePain/article/details/125658530
 
 #### map
 
@@ -342,6 +465,8 @@ vim  ~/**.dash_Profile**
       print("bytes:$bytes");
   // 转回来
       String r = utf8.decode(bytes);
+  //bytedata 
+  https://api.dart.dev/stable/1.10.1/dart-typed_data/ByteData-class.html
   ```
 
 
@@ -363,6 +488,11 @@ List<Snowflake>? snowflake; //接收参数
 MyPainter(this.snowflake);
 ```
 
+## UI study
+
+- [Flutter_deer ](https://github.com/simplezhli/flutter_deer)
+- ​
+
 ## 组件Widget
 
 - 快捷键 command + option + t  ：快速调出环绕代码
@@ -372,6 +502,11 @@ MyPainter(this.snowflake);
 - ​	**向下传递约束 向上传递尺寸**
 - 跳转页面的时候去掉 **MaterialApp** 不然没有返回箭头
 - listview切圆角要和背景图片一起设置
+
+### 下载地址
+
+- https://appgallery.huawei.com/app/C106428933 华为应用商店 吸哈
+- ​
 
 ### 常用组件
 
@@ -401,13 +536,42 @@ Navigator.pushNamed(
   context,
   '/details',
 );
+
+//报错 Flutter : Could not find a generator for route RouteSettings("/HomePage", null) in the _WidgetsAppState
+使用 Navigator.of(context, rootNavigator: true).pushNamed("/route");
+而不是Navigator.pushNamed("/route");
+rootNavigator 应用场景嵌套导航器
 ```
 
 - #### 结合onGenerateRoute使用
 
 #### 2.0路由
 
+### bottom_nav_bar
+
+- 常用库 persistent_bottom_nav_bar_v2
+
+  ```dart
+  NavBarStyle _navBarStyle = NavBarStyle.style15; 设置样式
+    onItemSelected: (index){}//设置点击事件
+  主页面不要设置appbar 每个页面单独设置
+  ```
+
+  ​
+
+### snackbar
+
+- another_flushbar: ^1.10.29
+- flash: ^2.0.3+3
+
 ### ChoiceChip
+
+### Overlay
+
+> `Overlay`是一个可以管理的堆栈,通过将一个Widget插入这个堆栈中，这样就可以让此`Widget`浮在其他的`Widget`之上，从而实现悬浮窗效果
+
+- OverlayEntry对象的配置来管理Overlay的层级关系
+- ​
 
 ### PopupMenu
 
@@ -439,24 +603,13 @@ Navigator.pushNamed(
 
 - SliverGrid  SliverToBoxAdapter SliverList搭配使用
 
+- spacer（）和
+
+  ​
+
 ### IndexedStack
 
 - 可以在几个页面切换的页面使用  设置currentIndex
-
-### Router
-
-类似放盘子
-
-- push 入栈  
-- pop 出 
-
-#### 命名路由
-
-routes:{	
-
-​	'/home':(context)=>Home(),
-
-}
 
 ### 页面保活
 
@@ -681,6 +834,7 @@ LogD(new_data);
 ### Button
 
 - Textbutton:  MaterialStateProperty.all()设置属性
+- Shape 设置圆角
 
 ### Localization
 
@@ -771,7 +925,18 @@ LogD(new_data);
 
 - [x] fluwx
       - no_pay版本
-- [ ] ​
+
+refer [登陆配置](https://blog.csdn.net/haoxuhong/article/details/117956586)
+
+#### ios端
+
+- 证书页面 需要打开 Associated Domains
+
+- [ ] 
+
+### 启动页
+
+- iOS 启动页白屏 添加1x 2x 3x图片 设置leading  traing top和bottom注意父视图设置成view 也可以解决顶部留白问题
 
 ### app名称国际化
 
@@ -791,8 +956,27 @@ LogD(new_data);
   - 添加"CFBundleName" = "flutter demo";
   - 删掉info.plist文件的 <key>CFBundleDisplayName</key><string>Feellife 1</string>
 
-I/flutter ( 2185): │ 🐛 lfs :: 我是蓝牙返回数据 - [0xe6, 0x17, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x4b, 0x00, 0x00, 0x00, 0x00, 0x55, 0x01, 0xf2, 0xa0, 0x08, 0x8f]
+
+### 底部导航栏沉浸
+
+```
+main() {
+  runApp(MyApp());
+  
+  if (Platform.isAndroid) {
+    SystemUiOverlayStyle systemUiOverlayStyle = SystemUiOverlayStyle(
+        statusBarColor: Colors.transparent,
+        systemNavigationBarColor: "#2196f3".toColor); 
+    SystemChrome.setSystemUIOverlayStyle(systemUiOverlayStyle);
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
+  }
+}
+```
+
+
 
 https://t66y.com/thread0806.php?fid=7
+
+//https://www.cnki.net/
 
 [^1]: 原生解析 

@@ -241,6 +241,15 @@ print(fn2(5))
   print(MemoryLayout<Point>.alignment)//8
   ```
 
+- **static修饰的属性不用创建结构体变量即可以访问和修改**
+
+  ```swift
+  struct MyStruct {
+      static var sharedProperty = "This is a shared property"
+  }
+  print(MyStruct.sharedProperty) // Output: "This is a shared property"
+  ```
+
 
 ## class
 
@@ -291,3 +300,109 @@ for (num,index) in numbers.enumerated()
 
 - ArraySlice
 
+
+## 高阶函数
+
+- map	
+
+  ```python
+  对传入的列表的每一个元素进行函数操作
+  def fun1(x):
+     return x + 2
+  list = [1,2,3,4,5,6]
+  res = map(fun1, list) //res是返回新的列表
+  ```
+
+## Protocol
+
+- 继承AnyObject 而不是Any
+
+  ```swift
+  // Any 代表了任何类型，包括值类型和引用类型  由于协议默认是没有继承任何类的，所以如果要限制一个协议只能被类遵守 当一个协议继承自 AnyObject 时，它就只能被类类型实现，不能被结构体或枚举实现
+  protocol GuideViewDelegate: AnyObject {
+      func didTapButton()
+  }
+  ```
+
+## iBreathe APP
+
+### Bundle id
+
+- com.cl.iBreathe
+- com.lfsmedical.FeelLife
+
+### 出现三方库版本问题，可以手动调节ios版本高低
+
+- [Stackover](https://stackoverflow.com/questions/75574268/missing-file-libarclite-iphoneos-a-xcode-14-3)
+
+
+### convenience
+
+- 便利构造函数 对init进行补充 调用的时候可以隐藏掉部分参数 
+
+
+### sb中 tabbar item图片颜色设置
+
+- 修改Assets里面 render as 为 original  (使用tabbar image tint统一配色 不用设置这个)
+- [refer](https://www.jianshu.com/p/a35edb802e22)
+
+### project refer
+
+- ShoppingCart-main
+
+### wx sdk 报错
+
+- 参考 https://developers.weixin.qq.com/community/develop/doc/000c6275b68bf014265b30dc256800?_at=1634607968131
+
+### RXSwift
+
+- [中文文档](https://beeth0ven.github.io/RxSwift-Chinese-Documentation/content/decision_tree.html)
+
+- 建模两种方式
+
+  ```swift
+  模型里面引用rxswift 订阅
+  struct DeviceListModel {
+      let items = PublishSubject<[DeviceListInfo]>()
+      func fetchItems(){
+          let viewModel = [
+              DeviceListInfo(imageName: "AirPro 1", title: "AirPro 1"),
+              DeviceListInfo(imageName: "AirPro 2", title: "AirPro 2"),
+          ]
+          items.onNext(viewModel)
+          items.onCompleted()
+      }
+      
+  }
+  模型不引用 外部 vc引用  
+  struct DeviceListModel {
+      static let items : [DeviceListInfo] = [
+          DeviceListInfo(imageName: "AirPro 1", title: "AirPro 1"),
+          DeviceListInfo(imageName: "AirPro 2", title: "AirPro 2"),
+      ]
+  }
+  struct DeviceListInfo {
+      let imageName: String
+      let title: String
+  }
+
+   let items = Observable.just(DeviceListModel.items)
+   
+   items.bind(to: collectionView.rx.items(cellIdentifier: "LFSDeviceListCollectionCell", cellType: LFSDeviceListCollectionCell.self)) { row, element, cell in
+                  cell.imageView.image = UIImage(named: element.imageName)
+                   cell.label.text = element.title
+              }
+              .disposed(by: disposeBag)
+  ```
+
+  ​
+
+
+- disposable
+
+  ```swift
+  var disposable: Disposable?  //可被清除的资源
+  尾部调用一下 释放这些资源或取消订阅
+  ```
+
+  ​

@@ -73,6 +73,10 @@ $ git clone https://git.llvm.org/git/clang.git/
 - **p (Class)0x00000001f0762d19** 打印类
 - x/4g 打印八个字节 四个
 
+### 堆栈信息
+
+- thread backtrace 可以查看调用栈
+
 ## lldb
 
 - -n 跳过整段函数 进入下一步 

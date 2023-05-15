@@ -22,6 +22,9 @@
 ## github
 
 - Token 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
+- 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 (new token)
+
+
 
 
 

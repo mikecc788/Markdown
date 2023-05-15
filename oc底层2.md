@@ -150,11 +150,9 @@ struct __CFRunLoopMode {
         NSLog(@"1");
     });
     NSLog(@"2");
-//   dispatch_sync(dispatch_get_main_queue(), ^任务块需要 1完成打印才能返回  打印1又在任务块的后面 同步又是按顺序来执行 所以相互等待
+//   dispatch_sync(dispatch_get_main_queue(), ^任务块需要 1完成打印才能返回(这里与打印没有任何关系 是dispatch_sync这个队列与block块之间的相互等待)  打印1又在任务块的后面 同步又是按顺序来执行 所以相互等待
 }
 ```
-
-![C4B7E751-3007-4283-BF9E-64156104F983](https://tva1.sinaimg.cn/large/e6c9d24egy1h4dc9qi7zaj21rk0ho40b.jpg)
 
 #### 异步  不会阻塞调用线程 
 
@@ -337,6 +335,10 @@ dispatch_group_notify
   - dispatch_barrier_(a)sync 解决数据竞争问题 同步函数无需栅栏函数
     - 栅栏函数仅与并发队列（DISPATCH_QUEUE_CONCURRENT）有效
     - 异步栅栏挡住后面的任务执行 必须自己里面的执行完 但是可以和前面的任务并行
+
+### 建立线程监控预警体系
+
+- 通过线程的销毁和创建来记录线程数量
 
 ## 内存管理
 
