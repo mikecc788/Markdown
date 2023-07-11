@@ -118,7 +118,6 @@ com.lfs.ibreathe.ble
 ### 审核
 
 - //本"吸哈"应用"体验-保健-任意文章下的往期推荐”页面存在定向广告但不涉及广告内容的个性化推送,因此不做显著标识。推荐广告内容向所有用户展示，非个性化推荐/定向推送
-- 后续提交审核时请在备注栏内说明“应用内推荐模块不涉及算法推送，推荐内容向所有用户展示，非个性化推荐/定向推送”
 
 ### AS常用快捷键
 
@@ -559,6 +558,10 @@ rootNavigator 应用场景嵌套导航器
 
   ​
 
+### Draw
+
+- How to make flutter drawer above bottom navigation  
+
 ### snackbar
 
 - another_flushbar: ^1.10.29
@@ -607,6 +610,14 @@ rootNavigator 应用场景嵌套导航器
 
   ​
 
+### TextField
+
+```dart
+//居中  设置  isCollapsed: true,以及Center
+```
+
+
+
 ### IndexedStack
 
 - 可以在几个页面切换的页面使用  设置currentIndex
@@ -633,6 +644,10 @@ rootNavigator 应用场景嵌套导航器
 
 - InkWell有的叫溅墨效果，有的叫水波纹效果
 - 可以添加 onTap点击方法
+
+### 底部tabbar
+
+- 第一次参考 [Marshal-S](https://github.com/Marshal-S)/flutter_list_demo
 
 ### 动画
 
@@ -754,7 +769,7 @@ late AnimationController _controller = AnimationController(vsync: this);
 
 ### SingleChildScrollView
 
-
+- 解决 Expand 布局页面 键盘弹出溢出问题 
 
 ### showModalBottomSheet
 
@@ -972,6 +987,20 @@ main() {
   }
 }
 ```
+
+## 输入框等弹出键盘超出范围
+
+- 使用SingleChildScrollView包裹部件
+
+
+## 点击弹出菜单栏
+
+- flutter_portal: ^1.1.4
+
+
+## sqflite update数据需要上传默认id
+
+## Navigator反向页面传值刷新页面.pop(true) then接收
 
 
 

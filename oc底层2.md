@@ -133,7 +133,11 @@ struct __CFRunLoopMode {
   }
   ```
 
-  ​
+
+### 队列与线程
+
+- 线程   执行任务
+- 队列   存放要执行的任务
 
 #### 死锁
 
@@ -150,9 +154,13 @@ struct __CFRunLoopMode {
         NSLog(@"1");
     });
     NSLog(@"2");
-//   dispatch_sync(dispatch_get_main_queue(), ^任务块需要 1完成打印才能返回(这里与打印没有任何关系 是dispatch_sync这个队列与block块之间的相互等待)  打印1又在任务块的后面 同步又是按顺序来执行 所以相互等待
+//   dispatch_sync(dispatch_get_main_queue(), ^任务块需要 1完成打印才能返回(这里与打印没有任何关系 是dispatch_sync这个队列与block块之间的相互等待)  打印1又在任务块的后面 同步又是按顺序来执行 所以相互等待 
+  // 主线程有两个队列 一个viewdidload 默认 一个  dispatch_sync(dispatch_get_main_queue(),
+  // 主线程执行三个任务 0 1 2
 }
 ```
+
+![img](https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2019/8/27/16cd38d923a450d5~tplv-t2oaga2asx-zoom-in-crop-mark:4536:0:0:0.image)
 
 #### 异步  不会阻塞调用线程 
 

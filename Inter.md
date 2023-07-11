@@ -89,7 +89,7 @@ typora-copy-images-to: ipic
 
 ## **Alamofire**
 
-
+- 网络请求
 
 ## RxSwift
 
@@ -254,6 +254,66 @@ post
 - 带body传输数据 相对安全一点 实际安全度由https决定
 
 
+## OC与swift异同
+
+- oc里面的引用计数、ARC、属性 协议、接口、初始化、扩展、命名参数等继续有效
+- 运行时机制也存在
+
+swift优点
+
+- 安全 oc灵活有 runtime
+- swift语法简单 易阅读  可选类型用于所有类型  oc使用nil
+
+
+
+## 属性观察
+
+```swift
+//当前类型内对特性属性进行监测,并作出响应
+// willSet会传递新值，默认叫newValue
+// didSet会传递旧值，默认叫oldValue
+// 在初始化器中设置属性值不会触发willSet和didSet
+var title: String {
+    willSet {
+        print("willSet", newValue)
+
+    }
+    didSet {
+        print("didSet", oldValue, title)
+    }
+}
+```
+
+## Swift和OC中的 protocol 有什么不同
+
+```swift
+// Swift中的 protocol还可以对接口进行抽象,可以实现面向协议
+protocol Drawable {
+    func draw()
+}
+class Circle: Drawable {
+    func draw() {
+        print("绘制一个圆形")
+    }
+}
+
+class Rectangle: Drawable {
+    func draw() {
+        print("绘制一个矩形")
+    }
+}
+```
+
+## OC和Swift中的扩展Extension区别
+
+- OC中有分类和扩展
+
+
+swift中只有扩展（更类似OC中的分类）
+
+## 主队列与主线程
+
+- 一个app只包含一个主队列和主线程
 
 
 

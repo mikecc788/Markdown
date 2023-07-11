@@ -79,6 +79,16 @@
 
 - zkape  0x47EF4A5641992A72CFd57b9406c9D9cefEE8e0C4
 
+### aleo
+
+```
+APrivateKey1zkp5THviE6jA3LCkn4gioJvuqJEigR2Lw1yzu77vvs1FpKc  Private key
+AViewKey1gJGiDhf6hC5KShpk2GqDrvefhcVKEkMGQRXws2tKDAWB        View key
+aleo177g48m8x0ny6hkf4w24uy5snqg5rnt6ax60m9eszqpf47a0fsg9q4zjhwd   address
+```
+
+
+
 ## History
 
 ### 秦

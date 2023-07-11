@@ -406,3 +406,34 @@ for (num,index) in numbers.enumerated()
   ```
 
   ​
+
+### Tableview 各种问题
+
+####iOS 15 适配 UITableView 内容自动下移22像素解决办法
+
+- 添加头视图的自动多出22
+
+  ```swift
+  if #available(iOS 15.0, *) {
+              self.tableView.sectionHeaderTopPadding = 0
+          } else {
+              // Fallback on earlier versions
+          }
+  ```
+
+  ​
+
+
+#### 状态栏挡住headerview
+
+- tableView.contentInsetAdjustmentBehavior = .never
+
+### ExpandCell 
+
+```
+method1 : 设置 var selectedIndex = -1
+    var isCollapse = false 变量 计算不同cell高度
+//推荐使用这个方法    
+method2 使用 var expandedcell:IndexSet = []  refer: Self-Sizing-UITableview-Cell-main
+```
+

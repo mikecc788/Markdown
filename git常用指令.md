@@ -111,11 +111,34 @@ git本地三个工作区域  工作目录（本地文件）、暂存区（add .�
 ## 关联远程仓库
 
 - 本地项目初始化 git init
+
 - git add README.md git commit -m "init first"
+
 - 关联远程仓库 git remote add origin git@github.com:mikecc788/Swift-algorithm.git
   - origin会成为远程仓库的名字，可以自行修改
+  - 关联的时候使用https开头好点 ssh涉及到一些验证
+
+- 绑定之后查看绑定地址  git remote -v   然后查看分支名称 git branch.
+
+  ```shell
+  feellife@iMac iBreathe % git branch
+  * main
+  feellife@iMac iBreathe % git branch -m main master
+  feellife@iMac iBreathe % git branch               
+  * master
+  //清除掉关联的仓库地址
+  feellife@iMac iBreathe % git remote -v
+  origin	git@github.com:mikecc788/iBreathe.git (fetch)
+  origin	git@github.com:mikecc788/iBreathe.git (push)
+  feellife@iMac iBreathe % git remote remove origin
+  feellife@iMac iBreathe % git remote -v           
+  ```
+
+  ​
+
 - git pull origin master --allow-unrelated-histories (该选项可以合并两个独立启动仓库的历史)
-- git push -u origin master
+
+- git push -u origin master（继续报错 使用 --force）
 
 
 ## Git命令
